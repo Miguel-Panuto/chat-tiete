@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
 
     const [ scheme, token ] = parts;
 
-    if(!/^Bearer$/i.test(scheme)) {
+    if('bearer' !== scheme.toLowerCase()) {
         return res.status(401).json({ error: 'Token not in correct format' });
     }
 
