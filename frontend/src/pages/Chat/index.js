@@ -11,7 +11,11 @@ const Chat = () => {
     });
 
     const verifyLogin = async () => {
-         api.get('/chat').then().catch(err =>{
+         api.get('/chat', {
+            headers: {
+                Authorization: localStorage.getItem('Authorization')
+            }
+         }).then().catch(err =>{
             if(err) {
                 history.push('/login')
             }
