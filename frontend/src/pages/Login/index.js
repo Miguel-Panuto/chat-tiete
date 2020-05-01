@@ -25,7 +25,7 @@ const Login = () => {
             localStorage.setItem('Authorization', 'Bearer ' + res.data.token);
             return history.push('/');
         })
-            .catch(err => alert('Email em uso'));
+            .catch(err => alert('Email ou senha incorreto(s)'));
     }
     return (
         <Container>
