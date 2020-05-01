@@ -24,7 +24,7 @@ module.exports = {
              
             res.json({ 
                 id: user[0], 
-                token: generateToken({ id: user[0], email }) 
+                token: generateToken({ id: user[0], email, name, city }) 
             });
         } catch(e) {
             res.status(500).send();

@@ -14,6 +14,12 @@ module.exports = {
 
         user[0].password = undefined;
         
-        return res.json({ id: user[0].id, token:generateToken({ id: user[0].id, email }) });
+        return res.json({ id: user[0].id, token:generateToken({ 
+            id: user[0].id,
+            name: user[0].name,
+            city: user[0].city, 
+            email 
+        }) 
+    });
     }
 }

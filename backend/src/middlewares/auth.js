@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
 
     jwt.verify(token, authConfig.secret, async (err, decoded) => {
         if(err) return res.status(401).json({ error: 'Invalid token' });
-        if(!decoded.id || !decoded.email) 
+        if(!decoded.id || !decoded.email || !decoded.name || !decoded.city) 
             return res.status(401).json({ error: 'Invalid token' });
         const findValidUser = await connection('users').select('id', 'email').where({
             id: decoded.id,
@@ -31,6 +31,8 @@ module.exports = (req, res, next) => {
             return res.status(401).json({ error: 'User not exist' });
 
         req.userId = decoded.id;
+        req.userName = decoded.name;
+        req.userCity = decoded.city;
         return next();
     })
 }
