@@ -6,6 +6,7 @@ exports.up = function(knex) {
       table.string('email').notNullable();
       table.string('city').notNullable();
       table.string('password').notNullable();
+      table.string('color').default('#CCCCCC');
   });
 };
 

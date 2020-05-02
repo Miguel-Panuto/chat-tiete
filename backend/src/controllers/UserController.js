@@ -2,9 +2,11 @@ const bcrypt = require('bcrypt');
 const connection = require('../database/connection');
 const generateToken = require('../utils/generateToken');
 
+const generateRandomColor = () => "#"+((1<<24)*Math.random()|0).toString(16)
+
 module.exports = {
     async index(req, res) {
-        const users = await connection('users').select('id', 'name', 'city');
+        const users = await connection('users').select('id', 'name', 'city', 'color');
         return res.json(users);
     },
 
@@ -19,7 +21,8 @@ module.exports = {
                 email,
                 name,
                 city,
-                password: hashPassword
+                password: hashPassword,
+                color: generateRandomColor()
             });
              
             res.json({ 
