@@ -6,8 +6,9 @@ const socketio = require('socket.io');
 
 const routes = require('./routes');
 
-const MessageController = require('./controllers/MessageController'); 
-const CitiesController = require('./controllers/CitiesController'); 
+// Controller
+const MessageController = require('./controllers/MessageController'); // Manage the messages
+const CitiesController = require('./controllers/CitiesController'); // Extract the cities
 
 const PORT = process.env.PORT || 3333;
 
@@ -15,25 +16,30 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+// When user connects on the front, he emmits 'connection', and the backend is listning for
 io.on('connection', socket => {
-    console.log('Socket conectado id: ', socket.handshake.query.id);
+    console.log('User id: ', socket.handshake.query.id, 'socket id : ', socket.id);
     MessageController.index().then(res => {
+        // This will send all previous messages for the user, and new users
         socket.emit('previousMessages', res);
     });
     CitiesController.index().then(res => {
+        // This will send to the entry users, all user that has a account
         socket.emit('users', res);
+        // And this to all users 
         socket.broadcast.emit('users', res);
     });
+    // This is for message receivement
     socket.on('sendMessage', messageData => {
+        // Creates the message on the database
         MessageController.create(messageData);
+        // And emmits too all users, the message and who is from
         socket.broadcast.emit('receiveMessage', {
             author: messageData.author,
             message: messageData.message
         });
     });
 });
-
-
 
 app.use(cors());
 app.use(express.json()); 

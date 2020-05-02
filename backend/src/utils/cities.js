@@ -1,4 +1,6 @@
-module.exports = [
+const ascendingOrder = require('./ascendigOrder');
+// This is the cities the pass through tiete river
+const cities = [
     'Salesópolis',
     'Biritiba Mirim',
     'Mogi das Cruzes',
@@ -54,4 +56,6 @@ module.exports = [
     'Andradina',
     'Castilho',
     'Itapura',
-];
+].sort(ascendingOrder);
+
+module.exports = cities;
