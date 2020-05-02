@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 export const Header = styled.header`
     display: flex;
@@ -46,12 +47,6 @@ export const ChatContainer = styled.div`
         flex: 5;
     }
 
-    .messenger-container .messages {
-        flex: 12;
-        width: 100%;
-        background-color: #FFFFFF;
-    }
-
     .messenger-container .send {
         flex: 1;
         width: 100%;
@@ -61,8 +56,29 @@ export const ChatContainer = styled.div`
         background-color: #E6E6E6;
         height: 100%;
         flex: 1;
+        padding: 10px 10px;
     }
 
+    .members h2 {
+        color: #469;
+        background-color: #ccc;
+        text-align: center;
+        padding: 3px;
+        margin: -10px -10px;
+        margin-bottom: 15px;
+    }
+
+`;
+
+export const Messages = styled.div`
+    padding: 10px 5%;     
+`;
+
+export const MessagesScrollBottom = styled(ScrollToBottom)`
+    flex: 12;
+    width: 100%;
+    background-color: #FFFFFF;
+    overflow-y: auto;
 `;
 
 export const Form = styled.form`
