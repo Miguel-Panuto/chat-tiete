@@ -1,33 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+// Components
 import { Container, Select } from './styles';
 import { Form, Label, Input, Button } from '../../global-styles';
+
 import CITIES from '../../utils/cities';
 import api from '../../services/api';
 
 const Register = () => {
     const history = useHistory();
+    // State variables
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [city, setCity] = useState('');
 
     useEffect(() => {
+        // This will verify if the user already is authorized
         if(localStorage.getItem('Authorization')) {
+            // And return to the main page
             history.push('/');
         }
-    })
+    });
 
-    const handleRegister = (e) => {
+    const handleRegister = e => {
         e.preventDefault();
+        // Post the user to the backend
         api.post('/users', {
             email,
             name,
             city,
             password
         }).then(res => {
+            // Picks the token generated
             localStorage.setItem('Authorization', 'Bearer ' + res.data.token);
+            // And push to chat
             return history.push('/');
         })
             .catch(err => alert('Email em uso'));
@@ -64,7 +72,7 @@ const Register = () => {
                     onChange={e => setPassword(e.target.value)}
                 />
                 <Label htmlFor="city">Cidade</Label>
-                <Select id="city" value={city} onChange={e => setCity(e.target.value)}>
+                <Select id="city" value={city} onChange={e => setCity(e.target.value)} required>
                     {CITIES.map((city, index) => (
                         <option value={city} key={index}>{city}</option>
                     ))}

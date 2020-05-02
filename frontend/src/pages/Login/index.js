@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+// Components
 import { Container } from './styles';
 import { Form, Label, Input, Button } from '../../global-styles';
+
 import api from '../../services/api';
 
 const Login = () => {
@@ -11,17 +13,21 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     useEffect(() => {
+        // This will verify if the user already is authorized
         if(localStorage.getItem('Authorization')) {
+            // And return to the main page
             history.push('/');
         }
     });
 
     const handleLogin = (e) => {
         e.preventDefault();
+        // Login sending the email and the password
         api.post('/sessions', {
             email,
             password
         }).then(res => {
+            // And then put the token to the local storage
             localStorage.setItem('Authorization', 'Bearer ' + res.data.token);
             return history.push('/');
         })

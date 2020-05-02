@@ -1,4 +1,6 @@
-const CITIES = [
+import ascendingOrder from './ascendigOrder';
+
+const cities = [
     'Salesópolis',
     'Biritiba Mirim',
     'Mogi das Cruzes',
@@ -54,6 +56,6 @@ const CITIES = [
     'Andradina',
     'Castilho',
     'Itapura',
-];
+].sort(ascendingOrder);
 
-export default CITIES;
+export default cities;
