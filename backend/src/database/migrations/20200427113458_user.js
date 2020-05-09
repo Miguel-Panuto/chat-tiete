@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
   // When use the command 'knex migrate:latest' will execute this function
   // This function will create the table user

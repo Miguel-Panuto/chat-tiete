@@ -56,7 +56,7 @@ export const Input = styled.input`
 
 export const Button = styled.button`
     background: rgb(57,59,82);
-    background: linear-gradient(90deg, #181921 0%, #090979 60%, #492dff 100%);
+    background: linear-gradient(90deg, #26FF35 0%, #17E896 60%, #19E0FF 100%);
     border: none;
     padding: 10px;
     border-radius: 10px;

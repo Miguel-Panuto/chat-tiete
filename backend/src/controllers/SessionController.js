@@ -26,7 +26,8 @@ module.exports = {
         return res.json({ id: user[0].id, token:generateToken({ 
             id: user[0].id,
             name: user[0].name,
-            email 
+            color: user[0].color, 
+            email
         }) 
     });
     }

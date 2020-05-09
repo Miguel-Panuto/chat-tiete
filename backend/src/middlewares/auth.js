@@ -28,7 +28,7 @@ module.exports = (req, res, next) => {
     jwt.verify(token, authConfig.secret, async (err, decoded) => {
         if(err) return res.status(401).json({ error: 'Invalid token' });
         // Verify if putted any stuff incorrect
-        if(!decoded.id || !decoded.email || !decoded.name || !decoded.city) 
+        if(!decoded.id || !decoded.email) 
             return res.status(401).json({ error: 'Invalid token' });
         
         // And find in the database the user id and email
@@ -43,6 +43,8 @@ module.exports = (req, res, next) => {
 
         req.userId = decoded.id;
         req.userName = decoded.name;
+        req.color = decoded.color;
         return next();
-    })
+    });
 }
+

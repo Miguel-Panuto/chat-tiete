@@ -13,7 +13,7 @@ const routes = express.Router();
 routes.get('/chat', authMiddleware, (req, res) => res.json({
     name: req.userName,
     id: req.userId,
-    city: req.userCity
+    color: req.color
 }));
 
 // Create a new user

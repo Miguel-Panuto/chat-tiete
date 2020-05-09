@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 
 // Components
 import { Container } from '../../global-styles';
-import { Header, Section, ChatContainer, Messages, MessagesScrollBottom,Form } from './styles';
+import { Header, Section, ChatContainer, Messages, MessagesScrollBottom, Form } from './styles';
 import Message from './components/Message';
 import MeMessage from './components/MeMessage';
 import UserByCity from './components/UserByCity';
@@ -21,6 +21,7 @@ const Chat = () => {
     const [myMessage, setMyMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([]);
+    const [userColor, setColor] = useState('');
     const [loaded, setLoaded] = useState(false);
  
     useEffect(() => {
@@ -50,14 +51,15 @@ const Chat = () => {
             }
         }).then(res => {
             // Picks the username and id
-            const { name, id } = res.data;
+            const { name, id, color } = res.data;
             setUserName(name);
             setUserId(id);
+            setColor(color);
             // connect to the connect
             socket = io('http://127.0.0.1:3333', {
                 query: {
                     name,
-                    id
+                    id,
                 }
             });
             // Set the loaded to true
@@ -107,12 +109,13 @@ const Chat = () => {
             socket.emit('sendMessage', {
                 id: userId,
                 message: myMessage,
-                author: userName
+                author: userName,
+                color: userColor
             });
             // Set the massages locally
             setMessages([...messages, {
                 author: userName,
-                message: myMessage
+                message: myMessage,
             }])
         }
         // Set the message locally

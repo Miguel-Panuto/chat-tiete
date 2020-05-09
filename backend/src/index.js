@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
@@ -36,7 +35,8 @@ io.on('connection', socket => {
         // And emmits too all users, the message and who is from
         socket.broadcast.emit('receiveMessage', {
             author: messageData.author,
-            message: messageData.message
+            message: messageData.message,
+            color: messageData.color
         });
     });
 });
