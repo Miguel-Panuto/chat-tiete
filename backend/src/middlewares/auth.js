@@ -25,7 +25,7 @@ module.exports = (req, res, next) => {
     }
 
     // And then verify if thw jwt is correct
-    jwt.verify(token, authConfig.secret, async (err, decoded) => {
+    jwt.verify(token, process.env.AUTH || authConfig.secret, async (err, decoded) => {
         if(err) return res.status(401).json({ error: 'Invalid token' });
         // Verify if putted any stuff incorrect
         if(!decoded.id || !decoded.email) 
