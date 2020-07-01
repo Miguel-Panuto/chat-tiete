@@ -43,6 +43,7 @@ const Register = () => {
 
     return (
         <Container>
+            <h1>TIETÊ CHAT</h1>
             <h2>Crie sua conta</h2>
             <Form onSubmit={handleRegister}>
                 <Label htmlFor="email">Nome</Label>

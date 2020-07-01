@@ -35,6 +35,7 @@ const Login = () => {
     }
     return (
         <Container>
+            <h1>TIETÊ CHAT</h1>
             <h2>Faça o seu login</h2>
             <Form onSubmit={handleLogin}>
                 <Label htmlFor="email">E-mail</Label>

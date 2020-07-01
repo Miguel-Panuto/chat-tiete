@@ -116,6 +116,7 @@ const Chat = () => {
             setMessages([...messages, {
                 author: userName,
                 message: myMessage,
+                user_id: userId
             }])
         }
         // Set the message locally
@@ -135,7 +136,7 @@ const Chat = () => {
                             <Messages>
                                 {messages.map((msg, index) => {
                                     // Render the component if the author isn't the user
-                                    if(msg.author !== userName)
+                                    if(msg.user_id !== userId)
                                         return <Message
                                         key={index}
                                         author={msg.author}
