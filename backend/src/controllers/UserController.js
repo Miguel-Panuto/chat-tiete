@@ -24,15 +24,18 @@ module.exports = {
             const hashPassword = await bcrypt.hash(password, 10);
             // And insert the user to the database
             const color = generateRandomColor();
-            const user = await connection('users').insert({
+            await connection('users').insert({
                 email,
                 name,
                 city,
                 password: hashPassword,
                 color
             });
+
+            const user = await connection('users').select('id').where('email', email);
              
-            res.json({ 
+            res.json({
+                id: user[0].id,  
                 token: generateToken({ id: user[0], email, name, color }) 
             });
         } catch(e) {

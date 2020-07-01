@@ -36,7 +36,8 @@ io.on('connection', socket => {
         socket.broadcast.emit('receiveMessage', {
             author: messageData.author,
             message: messageData.message,
-            color: messageData.color
+            color: messageData.color,
+            user_id: messageData.user_id
         });
     });
 });

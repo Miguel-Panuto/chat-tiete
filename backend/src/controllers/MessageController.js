@@ -4,7 +4,7 @@ module.exports ={
     async index() {
         // Import all the messages and the users from the database
         const messages = await connection('messages')
-            .select('users.name', 'messages.message', 'users.color')
+            .select('messages.user_id', 'users.name', 'messages.message', 'users.color')
             .leftJoin('users', 'messages.user_id', 'users.id');
         // And return to the front
         return messages.map(({ name, message, color }) => {
